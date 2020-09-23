@@ -10,24 +10,52 @@ function writePassword() {
 
 }
 function generatePassword() {
- var length = prompt("How many characters would you like your password to contain?");
+ 
+var passLength = prompt("How many characters would you like your password to contain?");
 var special = confirm("Click OK to conrfirm special characters.");
 var numeric = confirm("Click OK to confirm numeric characters.");
 var lowercase = confirm("Click OK to confirm including lowercase characters." );
 var uppercase =confirm("Click OK to confirm including uppercase characters ");
- if (length >= 8 && length<=128){
+var password= "";
+// possible passwordvalues
+var andrew ="";
+var values = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var getLow="abcdefghijklmnopqrstuvwxyz";
+var numb = "1234567890";
+var char = "!@#$%^&*()_+";
 
+if ((passLength >= 8 && passLength<=128) && (special || numeric || lowercase || uppercase )) {
+  if (special) {
+    andrew = andrew + char;
+  }
+  if (numeric){
+    andrew = andrew + numb;
+  }
+  if (lowercase){
+    andrew = andrew + getLow;
+  }
+  if (uppercase){
+    andrew = andrew + values;
+  }
+
+    
+  //  create for loop to choose charcters
+    for (var i = 0; i < passLength; i++){
+      var randomNum = Math.floor(Math.random() * andrew.length)
+      password = password + andrew.charAt(randomNum);
+      
+    }
+    return password;
+  }
+ 
+ else {
+   alert("You must include atleast 8 characters and atleast one criteria!")
  }
- else{
-   alert("You must include atleast 8 characters!")
- }
-  // alert 
-  // return
+
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
 
 
 
